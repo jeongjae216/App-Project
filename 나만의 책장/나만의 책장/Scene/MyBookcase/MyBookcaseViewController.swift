@@ -10,7 +10,7 @@ import SnapKit
 
 //MARK: - MyBookcaseViewController Class
 final class MyBookcaseViewController: UIViewController {
-
+    
     
     //프로퍼티
     private lazy var presenter = MyBookcasePresenter(viewController: self)
@@ -42,11 +42,11 @@ extension MyBookcaseViewController: MyBookcaseProtocol {
         self.navigationItem.title = "나만의 책장"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
-        //네비게이션 우측 바 버튼 아이템
+        //네비게이션 우측 버튼
         let rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
-            action: nil
+            action: #selector(self.didTapRightBarButtonItem)
         )
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
@@ -59,6 +59,26 @@ extension MyBookcaseViewController: MyBookcaseProtocol {
         self.tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+    
+    //ReviewWrite 뷰 컨트롤러 화면 띄우기
+    func presentToReviewWriteViewController() {
+        let viewController = UINavigationController(rootViewController: ReviewWriteViewController())
+        
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: true)
+    }
+    
+    
+}
+
+//MARK: - MyBookcaseViewController Extension
+private extension MyBookcaseViewController {
+    
+    
+    //네비게이션 우측 버튼이 눌렸을 때
+    @objc func didTapRightBarButtonItem() {
+        self.presenter.didTapRightBarButtonItem()
     }
     
     

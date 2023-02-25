@@ -19,6 +19,8 @@
 		A4F1515729A76E1E00A6920A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A4F1515629A76E1E00A6920A /* Alamofire */; };
 		A4F1515A29A76E2A00A6920A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A4F1515929A76E2A00A6920A /* Kingfisher */; };
 		A4F1515C29A76F3200A6920A /* MyBookcasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F1515B29A76F3200A6920A /* MyBookcasePresenter.swift */; };
+		A4F1516129AA01C500A6920A /* ReviewWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F1516029AA01C400A6920A /* ReviewWriteViewController.swift */; };
+		A4F1516329AA01E500A6920A /* ReviewWritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F1516229AA01E500A6920A /* ReviewWritePresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		A4F1514329A76D6C00A6920A /* ______________UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "______________UITests.swift"; sourceTree = "<group>"; };
 		A4F1514529A76D6C00A6920A /* ______________UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "______________UITestsLaunchTests.swift"; sourceTree = "<group>"; };
 		A4F1515B29A76F3200A6920A /* MyBookcasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookcasePresenter.swift; sourceTree = "<group>"; };
+		A4F1516029AA01C400A6920A /* ReviewWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWriteViewController.swift; sourceTree = "<group>"; };
+		A4F1516229AA01E500A6920A /* ReviewWritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWritePresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +149,18 @@
 			isa = PBXGroup;
 			children = (
 				A4F1515E29A76F7700A6920A /* MyBookcase */,
+				A4F1516429AA020200A6920A /* ReviewWrite */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		A4F1516429AA020200A6920A /* ReviewWrite */ = {
+			isa = PBXGroup;
+			children = (
+				A4F1516029AA01C400A6920A /* ReviewWriteViewController.swift */,
+				A4F1516229AA01E500A6920A /* ReviewWritePresenter.swift */,
+			);
+			path = ReviewWrite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,8 +303,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4F1516329AA01E500A6920A /* ReviewWritePresenter.swift in Sources */,
 				A4F1512729A76D6B00A6920A /* MyBookcaseViewController.swift in Sources */,
 				A4F1515C29A76F3200A6920A /* MyBookcasePresenter.swift in Sources */,
+				A4F1516129AA01C500A6920A /* ReviewWriteViewController.swift in Sources */,
 				A4F1512329A76D6B00A6920A /* AppDelegate.swift in Sources */,
 				A4F1512529A76D6B00A6920A /* SceneDelegate.swift in Sources */,
 			);

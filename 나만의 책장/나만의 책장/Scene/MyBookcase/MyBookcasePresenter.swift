@@ -12,6 +12,7 @@ import UIKit
 protocol MyBookcaseProtocol {
     func setupNavigationBar()
     func setupViews()
+    func presentToReviewWriteViewController()
 }
 
 //MARK: - MyBookcasePresenter Class
@@ -20,6 +21,7 @@ final class MyBookcasePresenter: NSObject {
     
     //프로퍼티
     private let viewController: MyBookcaseProtocol
+    
     init(viewController: MyBookcaseProtocol) {
         self.viewController = viewController
     }
@@ -28,6 +30,11 @@ final class MyBookcasePresenter: NSObject {
     func viewDidLoad() {
         self.viewController.setupNavigationBar()
         self.viewController.setupViews()
+    }
+    
+    //뷰 컨트롤러에서 didTapRightBarButtonItem() 호출 됐을 때
+    func didTapRightBarButtonItem() {
+        self.viewController.presentToReviewWriteViewController()
     }
     
     
