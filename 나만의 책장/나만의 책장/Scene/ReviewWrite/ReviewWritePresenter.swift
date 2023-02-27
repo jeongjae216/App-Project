@@ -12,6 +12,8 @@ protocol ReviewWriteProtocol {
     func setupNavigationBar()
     func showCloseAlertSheet()
     func save()
+    func setupViews()
+    func presentToSearchBookViewController()
 }
 
 //MARK: - ReviewWritePresenter Class
@@ -28,6 +30,7 @@ final class ReviewWritePresenter: NSObject {
     //뷰가 생성되었을 때 호출될 함수
     func viewDidLoad() {
         self.viewController.setupNavigationBar()
+        self.viewController.setupViews()
     }
     
     //뷰 컨트롤러에서 didTapLeftBarButtonItem()이 호출 되었을 때
@@ -39,6 +42,11 @@ final class ReviewWritePresenter: NSObject {
     func didTapRightBarButtonItem() {
         //ToDo: 저장 기능 구현
         self.viewController.save()
+    }
+    
+    //뷰 컨트롤러에서 didTapBookTitleButton()이 호출 되었을 때
+    func didTapBookTitleButton() {
+        self.viewController.presentToSearchBookViewController()
     }
     
     

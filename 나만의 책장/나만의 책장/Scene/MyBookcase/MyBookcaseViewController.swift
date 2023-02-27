@@ -14,6 +14,7 @@ final class MyBookcaseViewController: UIViewController {
     
     //프로퍼티
     private lazy var presenter = MyBookcasePresenter(viewController: self)
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         
@@ -27,6 +28,13 @@ final class MyBookcaseViewController: UIViewController {
         super.viewDidLoad()
         
         self.presenter.viewDidLoad()
+    }
+    
+    //뷰가 다시 나타날 때
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.presenter.viewWillAppear()
     }
     
     
@@ -67,6 +75,13 @@ extension MyBookcaseViewController: MyBookcaseProtocol {
         
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: true)
+    }
+    
+    //테이블 뷰 Reload
+    func reloadTableView() {
+        self.tableView.reloadData()
+        
+        print("reload")
     }
     
     

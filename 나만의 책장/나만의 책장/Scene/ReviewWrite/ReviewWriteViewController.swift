@@ -13,7 +13,45 @@ final class ReviewWriteViewController: UIViewController {
     
     
     //프로퍼티
-    lazy var presenter = ReviewWritePresenter(viewController: self)
+    private lazy var presenter = ReviewWritePresenter(viewController: self)
+    
+    private lazy var bookTitleButton: UIButton = {
+        let button = UIButton()
+        
+        button.setTitle("책 제목", for: .normal)
+        button.setTitleColor(.tertiaryLabel, for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.titleLabel?.font = .systemFont(ofSize: 23, weight: .bold)
+        button.addTarget(
+            self,
+            action: #selector(self.didTapBookTitleButton),
+            for: .touchUpInside
+        )
+        
+        return button
+    }()
+    
+    private lazy var contentsTextView: UITextView = {
+        let textView = UITextView()
+        
+        textView.text = "입력해주세요."
+        textView.textColor = .tertiaryLabel
+        textView.font = .systemFont(ofSize: 16, weight: .medium)
+        
+        textView.delegate = self
+        
+        return textView
+    }()
+    
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .secondarySystemBackground
+        
+        return imageView
+    }()
     
     //뷰가 생성되었을 때
     override func viewDidLoad() {
@@ -77,8 +115,45 @@ extension ReviewWriteViewController: ReviewWriteProtocol {
         )
     }
     
+    //내용 저장하기
     func save() {
         self.dismiss(animated: true)
+    }
+    
+    //뷰 컨트롤러 셋업
+    func setupViews() {
+        self.view.backgroundColor = .systemBackground
+        
+        [self.bookTitleButton, self.contentsTextView, self.imageView] .forEach {
+            self.view.addSubview($0)
+        }
+        //책 제목 버튼 LayOut
+        self.bookTitleButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(20)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(20)
+        }
+        //리뷰 작성 텍스트 뷰 LayOut
+        self.contentsTextView.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(16)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.top.equalTo(self.bookTitleButton.snp.bottom).offset(16)
+        }
+        //이미지 뷰 LayOut
+        self.imageView.snp.makeConstraints {
+            $0.leading.equalTo(self.contentsTextView.snp.leading)
+            $0.trailing.equalTo(self.contentsTextView.snp.trailing)
+            $0.top.equalTo(self.contentsTextView.snp.bottom).offset(16)
+            $0.height.equalTo(200)
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
+        }
+    }
+    
+    //SearchBook 뷰 컨트롤러 화면 띄우기
+    func presentToSearchBookViewController() {
+        let viewController = UINavigationController(rootViewController: SearchBookViewController())
+        
+        self.present(viewController, animated: true)
     }
     
     
@@ -96,6 +171,27 @@ extension ReviewWriteViewController {
     //네비게이션 우측 버튼이 눌렸을 때
     @objc func didTapRightBarButtonItem() {
         self.presenter.didTapRightBarButtonItem()
+    }
+    
+    //책 제목 버튼이 눌렸을 때
+    @objc func didTapBookTitleButton() {
+        self.presenter.didTapBookTitleButton()
+    }
+    
+    
+}
+
+//MARK: - ReviewWriteViewController Extension
+extension ReviewWriteViewController: UITextViewDelegate {
+    
+    
+    //텍스트 뷰가 눌렸을 때
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        guard textView.textColor == .tertiaryLabel else {
+            return
+        }
+        textView.text = nil
+        textView.textColor = .label
     }
     
     

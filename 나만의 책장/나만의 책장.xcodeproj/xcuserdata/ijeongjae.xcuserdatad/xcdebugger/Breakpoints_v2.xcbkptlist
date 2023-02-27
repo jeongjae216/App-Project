@@ -3,4 +3,54 @@
    uuid = "0ED104F4-2C54-4D4F-830C-B376EC700553"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B250AE67-E266-4B65-8CD0-0AB170716F58"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x1102;&#x1161;&#x1106;&#x1161;&#x11ab;&#x110b;&#x1174; &#x110e;&#x1162;&#x11a8;&#x110c;&#x1161;&#x11bc;/Scene/ReviewWrite/ReviewWritePresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4A7A5712-9B48-4EB3-85C0-B91C6209B9AC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x1102;&#x1161;&#x1106;&#x1161;&#x11ab;&#x110b;&#x1174; &#x110e;&#x1162;&#x11a8;&#x110c;&#x1161;&#x11bc;/Scene/ReviewWrite/ReviewWritePresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA010CF0-D5F5-4693-80A3-1272C9C167A3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x1102;&#x1161;&#x1106;&#x1161;&#x11ab;&#x110b;&#x1174; &#x110e;&#x1162;&#x11a8;&#x110c;&#x1161;&#x11bc;/Scene/ReviewWrite/ReviewWritePresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

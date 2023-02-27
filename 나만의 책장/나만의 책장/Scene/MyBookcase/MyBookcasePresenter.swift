@@ -13,6 +13,7 @@ protocol MyBookcaseProtocol {
     func setupNavigationBar()
     func setupViews()
     func presentToReviewWriteViewController()
+    func reloadTableView()
 }
 
 //MARK: - MyBookcasePresenter Class
@@ -30,6 +31,12 @@ final class MyBookcasePresenter: NSObject {
     func viewDidLoad() {
         self.viewController.setupNavigationBar()
         self.viewController.setupViews()
+    }
+    
+    //뷰가 다시 나타날 때 호출되는 함수
+    func viewWillAppear() {
+        //ToDo: UserDefaults에서 내용 가져오기
+        self.viewController.reloadTableView()
     }
     
     //뷰 컨트롤러에서 didTapRightBarButtonItem() 호출 됐을 때
