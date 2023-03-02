@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 //MARK: - ReviewWriteViewController Class
 final class ReviewWriteViewController: UIViewController {
@@ -46,7 +47,7 @@ final class ReviewWriteViewController: UIViewController {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.backgroundColor = .secondarySystemBackground
         
@@ -151,9 +152,18 @@ extension ReviewWriteViewController: ReviewWriteProtocol {
     
     //SearchBook 뷰 컨트롤러 화면 띄우기
     func presentToSearchBookViewController() {
-        let viewController = UINavigationController(rootViewController: SearchBookViewController())
+        let viewController = UINavigationController(
+            rootViewController: SearchBookViewController(searchBookDelegate: self.presenter)
+        )
         
         self.present(viewController, animated: true)
+    }
+    
+    //View 업 데이트 하기
+    func updateViews(title: String, imageURL: URL?) {
+        self.bookTitleButton.setTitle(title, for: .normal)
+        self.bookTitleButton.setTitleColor(.label, for: .normal)
+        self.imageView.kf.setImage(with: imageURL)
     }
     
     

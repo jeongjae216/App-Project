@@ -11,6 +11,12 @@ import UIKit
 protocol SearchBookProtocol {
     func setupViews()
     func dismiss()
+    func reloadView()
+}
+
+//MARK: - SearchBookDelegate Protocol
+protocol SearchBookDelegate {
+    func selectBook(_ book: Book)
 }
 
 //MARK: - SearchBookPresenter Class
@@ -19,9 +25,18 @@ final class SearchBookPresenter: NSObject {
     
     //프로퍼티
     private let viewController: SearchBookProtocol
+    private let bookSearchManager = BookSearchManager()
     
-    init(viewController: SearchBookProtocol) {
+    private let delegate: SearchBookDelegate
+    
+    private var books: [Book] = []
+    
+    init(
+        viewController: SearchBookProtocol,
+        delegate: SearchBookDelegate
+    ) {
         self.viewController = viewController
+        self.delegate = delegate
     }
     
     //뷰가 생성되었을 때 호출되는 함수
@@ -34,13 +49,21 @@ final class SearchBookPresenter: NSObject {
 
 //MARK: - SearchBookPresenter Extension
 extension SearchBookPresenter: UISearchBarDelegate {
-    
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else { return }
+        bookSearchManager.request(from: searchText) { [weak self] newBooks in
+            self?.books = newBooks
+            self?.viewController.reloadView()
+        }
+    }
 }
 
 //MARK: - SearchBookPresenter Extension
 extension SearchBookPresenter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedBook = self.books[indexPath.row]
+        self.delegate.selectBook(selectedBook)
+        
         self.viewController.dismiss()
     }
 }
@@ -48,13 +71,13 @@ extension SearchBookPresenter: UITableViewDelegate {
 //MARK: - SearchBookPresenter Extension
 extension SearchBookPresenter: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        self.books.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         
-        cell.textLabel?.text = "\(indexPath.row)"
+        cell.textLabel?.text = self.books[indexPath.row].title
         
         return cell
     }

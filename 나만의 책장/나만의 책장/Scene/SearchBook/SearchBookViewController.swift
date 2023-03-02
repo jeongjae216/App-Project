@@ -13,7 +13,12 @@ final class SearchBookViewController: UIViewController {
     
     
     //프로퍼티
-    private lazy var presenter = SearchBookPresenter(viewController: self)
+    private lazy var presenter = SearchBookPresenter(
+        viewController: self,
+        delegate: self.searchBookDelegate
+    )
+    
+    private let searchBookDelegate: SearchBookDelegate
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -23,6 +28,16 @@ final class SearchBookViewController: UIViewController {
         
         return tableView
     }()
+    
+    init(searchBookDelegate: SearchBookDelegate) {
+        self.searchBookDelegate = searchBookDelegate
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //뷰가 생성되었을 때
     override func viewDidLoad() {
@@ -59,7 +74,12 @@ extension SearchBookViewController: SearchBookProtocol {
     
     //책 검색 결과가 눌렸을 때
     func dismiss() {
+        self.navigationItem.searchController?.dismiss(animated: true)
         self.dismiss(animated: true)
+    }
+    
+    func reloadView() {
+        self.tableView.reloadData()
     }
     
     
