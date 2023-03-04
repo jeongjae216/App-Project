@@ -180,7 +180,7 @@ extension ReviewWriteViewController {
     
     //네비게이션 우측 버튼이 눌렸을 때
     @objc func didTapRightBarButtonItem() {
-        self.presenter.didTapRightBarButtonItem()
+        self.presenter.didTapRightBarButtonItem(contentsText: self.contentsTextView.text)
     }
     
     //책 제목 버튼이 눌렸을 때

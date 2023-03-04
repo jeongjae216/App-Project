@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 //MARK: - MyBookcase Protocol
 protocol MyBookcaseProtocol {
@@ -22,6 +23,9 @@ final class MyBookcasePresenter: NSObject {
     
     //프로퍼티
     private let viewController: MyBookcaseProtocol
+    private let userDefaultsManager = UserDefaultsManager()
+    
+    private var review: [BookReview] = []
     
     init(viewController: MyBookcaseProtocol) {
         self.viewController = viewController
@@ -35,7 +39,7 @@ final class MyBookcasePresenter: NSObject {
     
     //뷰가 다시 나타날 때 호출되는 함수
     func viewWillAppear() {
-        //ToDo: UserDefaults에서 내용 가져오기
+        self.review = self.userDefaultsManager.getReviews()
         self.viewController.reloadTableView()
     }
     
@@ -53,14 +57,25 @@ extension MyBookcasePresenter: UITableViewDataSource {
     
     //행의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return self.review.count
     }
     
     //셀 설정
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        let review = review[indexPath.row]
         
-        cell.textLabel?.text = "\(indexPath)"
+        cell.textLabel?.text = review.title
+        cell.detailTextLabel?.text = review.contents
+        cell.imageView?.kf.setImage(
+            with: review.imageURL,
+            placeholder: .none,
+            completionHandler: {_ in
+                cell.setNeedsLayout()
+            }
+        )
+        
+        cell.selectionStyle = .none
         
         return cell
     }

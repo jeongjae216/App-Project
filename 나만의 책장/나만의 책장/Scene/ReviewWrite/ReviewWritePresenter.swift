@@ -24,6 +24,9 @@ final class ReviewWritePresenter: NSObject {
     
     //프로퍼티
     private let viewController: ReviewWriteProtocol
+    private let userDefaultsManager = UserDefaultsManager()
+    
+    private var book: Book?
     
     init(viewController: ReviewWriteProtocol) {
         self.viewController = viewController
@@ -41,8 +44,15 @@ final class ReviewWritePresenter: NSObject {
     }
     
     //뷰 컨트롤러에서 didTapRightBarButtonItem()이 호출 되었을 때
-    func didTapRightBarButtonItem() {
-        //ToDo: 저장 기능 구현
+    func didTapRightBarButtonItem(contentsText: String?) {
+        guard let book = book else { return }
+        
+        let bookReview = BookReview(
+            title: book.title,
+            contents: contentsText ?? "",
+            imageURL: book.imgURL
+        )
+        self.userDefaultsManager.setReview(bookReview)
         self.viewController.save()
     }
     
@@ -59,6 +69,8 @@ extension ReviewWritePresenter: SearchBookDelegate {
     
     
     func selectBook(_ book: Book) {
+        self.book = book
+        
         self.viewController.updateViews(title: book.title, imageURL: book.imgURL)
     }
     
